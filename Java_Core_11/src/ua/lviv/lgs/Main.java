@@ -1,5 +1,6 @@
 package ua.lviv.lgs;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
@@ -9,35 +10,42 @@ public class Main {
 	public static void main(String[] args) 
 	{
 		//1
-		Integer[] intArray = new Integer[10];
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		
-		for (int i = 0; i < intArray.length; i++) 
+		for (int i = 0; i < 10; i++) 
 		{
-			intArray[i] = (int)(10 * Math.random());
+			list.add((int) (10 * Math.random()));
 		}
-		System.out.println("\nCreated");
-		System.out.println(Arrays.deepToString(intArray));
-
-		Arrays.sort(intArray);
-		System.out.println("\nSorted");
-		System.out.println(Arrays.deepToString(intArray));
 		
+		System.out.println("\nBefore sorting");
+		System.out.println(list);
 		
-		Arrays.sort(intArray, Collections.reverseOrder());
-		System.out.println("\nReverese sorted");
-		System.out.println(Arrays.deepToString(intArray));
+		Collections.sort(list);
+		
+		System.out.println("\nAfter sorting");
+		System.out.println(list);
+		
+		Collections.sort(list, Collections.reverseOrder());
 
+		System.out.println("\nAfter reverese sorting");
+		System.out.println(list);
 		
 		//2
-		Automobile[][] automobile = new Automobile[(int)(10 * Math.random())][(int)(10 * Math.random())];
+		ArrayList<ArrayList<Automobile>> automobile = new ArrayList<ArrayList<Automobile>>();
 		
-		for (int i = 0; i < automobile.length; i++) 
+		for(int i = 0; i < (int) (2 + 1 * Math.random()); i++)
 		{
-			for (int j = 0; j < automobile[i].length; j++) 
+			automobile.add(new ArrayList<Automobile>());
+			
+			for (int j = 0; j < (int) (2 + 1 * Math.random()); j++) 
 			{
-				automobile[i][j] = new Automobile((int)(600 * Math.random() + 100), (int)(70 * Math.random() + 1950));
+				automobile.get(i).add(new Automobile());
+				automobile.get(i).get(j).setRandom();
 			}
 		}
+		
+		System.out.println("\nCars");
+		System.out.println(automobile);
 		
 		Scanner scan = new Scanner(System.in);
 		boolean running = true;
@@ -53,14 +61,14 @@ public class Main {
 			{
 				case 1:
 				{
-					System.out.println(Arrays.deepToString(automobile));
+					System.out.println(automobile);
 					break;
 				}
 				case 2:
 				{
-					for(int i = 0; i < automobile.length; i++)
+					for(ArrayList object: automobile)
 					{
-						Arrays.fill(automobile[i], new Automobile(115, 1956));
+						Collections.fill(object, new Automobile(155, 1978, 5, "Plastic", 3));
 					}
 					break;
 				}
